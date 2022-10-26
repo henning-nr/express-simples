@@ -1,0 +1,16 @@
+<script src="https://www.w3schools.com/appml/2.0.3/appml.js"></script>
+<link rel="stylesheet" href="./style.css" />
+<h1>Hello Express!</h1>
+<main>
+  <a href="/cep">Pega cep</a>
+  <table appml-data="pessoasObj">
+    <tr>
+      <th>Customer</th>
+      <th>City</th>
+    </tr>
+    <tr appml-repeat="registros">
+      <td>{{nome}}</td>
+      <td>{{idade}}</td>
+    </tr>
+  </table>
+</main>

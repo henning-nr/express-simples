@@ -1,0 +1,47 @@
+<script src="https://www.w3schools.com/appml/2.0.3/appml.js"></script>
+<link rel="stylesheet" href="./style.css" />
+<h1>Hello CEP!</h1>
+<main>
+  <a href="/">Voltar</a>
+  <div id="cepOld" appml-data="cepServer">
+    <ul>
+      <li>{{data.cep}}</li>
+      <li>{{data.logradouro}}</li>
+      <li>{{data.complemento}}</li>
+      <li>{{data.bairro}}</li>
+      <li>{{data.localidade}}</li>
+      <li>{{data.ddd}}</li>
+    </ul>
+  </div>
+
+  <div>
+    <ul id="cepNew"></ul>
+  </div>
+
+  <main></main>
+
+  <input type="text" placeholder="cep" name="cep" id="cep" />
+  <button onclick="enviarCep()">Enviar</button>
+</main>
+<script>
+  async function enviarCep(cep) {
+    var cepServer2 = {};
+    let cepInput = document.getElementById('cep').value;
+    console.log(cepInput);
+
+    fetch('/cep/' + cepInput, { method: 'get' }).then(async (response) => {
+      cepServer2 = await response.json();
+
+      ul = document.getElementById('cepNew');
+      old = document.getElementById('cepOld');
+      lis = '';
+      for (let ob in cepServer2) {
+        console.log(cepServer2[ob]);
+        lis += `<li>${cepServer2[ob]}</li>`;
+      }
+      console.log('aq', lis);
+      ul.innerHTML = lis;
+      old.style.display = 'none';
+    });
+  }
+</script>
